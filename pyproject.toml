@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "numbers-dont-lie"
+version = "0.1.0"
+description = "Privacy-preserving synthetic test data generator for databases"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Numbers Don't Lie Contributors" },
+]
+keywords = ["synthetic-data", "testing", "privacy", "database", "delta"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Database",
+    "Topic :: Software Development :: Testing",
+]
+
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg2-binary>=2.9"]
+mysql = ["mysql-connector-python>=8.0"]
+odbc = ["pyodbc>=5.0"]
+gui = ["PySide6>=6.5"]
+delta = ["pyspark>=3.4", "delta-spark>=2.4"]
+all = [
+    "psycopg2-binary>=2.9",
+    "mysql-connector-python>=8.0",
+    "pyodbc>=5.0",
+    "PySide6>=6.5",
+    "pyspark>=3.4",
+    "delta-spark>=2.4",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.scripts]
+numbers-dont-lie = "numbers_dont_lie.gui.app:main"
+
+[project.urls]
+Homepage = "https://github.com/numbers-dont-lie/numbers-dont-lie"
+Repository = "https://github.com/numbers-dont-lie/numbers-dont-lie"
+Issues = "https://github.com/numbers-dont-lie/numbers-dont-lie/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/numbers_dont_lie"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
